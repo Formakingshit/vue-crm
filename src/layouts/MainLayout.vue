@@ -1,58 +1,10 @@
 <template>
   <div class="app-main-layout">
-    <nav class="navbar orange lighten-1">
-      <div class="nav-wrapper">
-        <div class="navbar-left">
-          <a href="#">
-            <i class="material-icons black-text">dehaze</i>
-          </a>
-          <span class="black-text">12.12.12</span>
-        </div>
+    <app-navbar @click="isOpen = !isOpen"></app-navbar>
 
-        <ul class="right hide-on-small-and-down">
-          <li>
-            <a class="dropdown-trigger black-text" href="#" data-target="dropdown">
-              USER NAME
-              <i class="material-icons right">arrow_drop_down</i>
-            </a>
+    <app-sidebar v-model="isOpen"></app-sidebar>
 
-            <ul id="dropdown" class="dropdown-content">
-              <li>
-                <a href="#" class="black-text">
-                  <i class="material-icons">account_circle</i>Профиль
-                </a>
-              </li>
-              <li class="divider" tabindex="-1"></li>
-              <li>
-                <a href="#" class="black-text">
-                  <i class="material-icons">assignment_return</i>Выйти
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <ul class="sidenav app-sidenav open">
-      <li>
-        <a href="#" class="waves-effect waves-orange pointer">Счет</a>
-      </li>
-      <li>
-        <a href="#" class="waves-effect waves-orange pointer">История</a>
-      </li>
-      <li>
-        <a href="#" class="waves-effect waves-orange pointer">Планирование</a>
-      </li>
-      <li>
-        <a href="#" class="waves-effect waves-orange pointer">Новая запись</a>
-      </li>
-      <li>
-        <a href="#" class="waves-effect waves-orange pointer">Категории</a>
-      </li>
-    </ul>
-
-    <main class="app-content">
+    <main class="app-content" :class="{full: !isOpen}">
       <div class="app-page">
         <router-view></router-view>
       </div>
@@ -67,7 +19,21 @@
 </template>
 
 <script>
-export default {};
+import Navbar from "@/components/app/Navbar.vue";
+import Sidebar from "@/components/app/Sidebar.vue";
+
+export default {
+  name: "main-layout",
+  data() {
+    return {
+      isOpen: true
+    };
+  },
+  components: {
+    appNavbar: Navbar,
+    appSidebar: Sidebar
+  }
+};
 </script>
 
 <style>
