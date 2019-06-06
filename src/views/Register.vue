@@ -96,7 +96,7 @@ export default {
     agree: { checked: value => value }
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
@@ -107,8 +107,12 @@ export default {
         password: this.password,
         name: this.name
       };
-      console.log(formData);
-      this.$router.push("/");
+
+      try {
+        await this.$store.dispatch("register", formData);
+        this.$router.push("/");
+      } catch (e) {
+      }
     }
   }
 };
